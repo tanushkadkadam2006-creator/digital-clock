@@ -1,0 +1,105 @@
+/* Universal reset for predictable sizing */
+* { 
+  box-sizing: border-box; 
+} 
+
+/* Centering layout across the screen view */
+body { 
+  margin: 0; 
+  min-height: 100vh; 
+  display: grid; 
+  place-items: center; 
+  background: #0f172a; /* Darker slate background */
+  color: white; 
+  font-family: Arial, sans-serif; 
+  overflow: hidden; /* Prevents scrollbars from moving orbs */
+  position: relative;
+} 
+
+/* --- ANIMATED BACKGROUND ELEMENTS --- */
+.orb {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none; /* Stops background from blocking clicks */
+}
+
+.orb-1 {
+  background: radial-gradient(circle, #38bdf8, transparent 70%);
+  top: -10%;
+  left: -10%;
+  animation: floatOrb1 15s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  background: radial-gradient(circle, #ec4899, transparent 70%);
+  bottom: -10%;
+  right: -10%;
+  animation: floatOrb2 18s ease-in-out infinite alternate;
+}
+
+/* Keyframe Animations for Fluid Background Motion */
+@keyframes floatOrb1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(15vw, 10vh) scale(1.2); }
+}
+
+@keyframes floatOrb2 {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-15vw, -10vh) scale(0.9); }
+}
+
+/* --- CLOCK WIDGET DESIGN --- */
+.clock { 
+  position: relative;
+  z-index: 2; /* Sits cleanly above the blurred background orbs */
+  text-align: center; 
+  padding: 40px 60px; 
+  border-radius: 24px; 
+  background: rgba(30, 41, 59, 0.7); /* Translucent glass effect */
+  backdrop-filter: blur(12px); /* Blurs whatever background passes behind it */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover pop effect */
+.clock:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Main title element styling */
+h1 { 
+  color: #38bdf8; 
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 0;
+  margin-bottom: 20px;
+} 
+
+/* Dynamic fluid typography for the timer display numbers */
+#time { 
+  font-size: clamp(2.8rem, 9vw, 4.5rem); 
+  font-weight: bold; 
+  font-family: 'Courier New', Courier, monospace; 
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Smooth gradient on the clock text */
+} 
+
+/* Secondary visual element text styling for calendar dates */
+#date { 
+  color: #94a3b8; 
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
